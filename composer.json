@@ -78,6 +78,16 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "start": [
+            "Composer\\Config::disableProcessTimeout",
+            "symfony serve"
+        ],
+        "test:cs": [
+            "php vendor/bin/php-cs-fixer fix"
+        ],
+        "fix:cs": [
+            "php vendor/bin/php-vs-fixer fix"
         ]
     },
     "conflict": {
@@ -99,5 +109,10 @@
         "symfony/phpunit-bridge": "^6.3",
         "symfony/stopwatch": "6.3.*",
         "symfony/web-profiler-bundle": "6.3.*"
+    },
+    "scripts-descriptions": {
+        "test:cs": "Run cs-fixer tests",
+        "fix:cs": "Run cs-fixer fixes",
+        "start": "Start the server"
     }
 }
