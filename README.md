@@ -3,7 +3,7 @@
 Axel COUDROT
 ## INSTALLATION / CONFIGURATION
 ### INSTALLATION
-Pour installer le projet vous allez devoir : 
+Pour installer le projet, vous allez devoir : 
 - Avoir installé symfony et composer sur votre machine,
 - Cloner le projet : 
 ```
