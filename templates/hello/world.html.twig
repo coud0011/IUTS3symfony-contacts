@@ -1,0 +1,10 @@
+{# templates/hello/world.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ name }}!{% endblock %}
+{% block body %}
+    <h1>Hello {{ name }}!</h1>
+    {% for n in 1..10 %}
+        <p>Hello {{ name }}! ({{ n }})</p>
+    {% endfor %}
+{% endblock %}
