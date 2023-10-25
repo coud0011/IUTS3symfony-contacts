@@ -88,7 +88,7 @@
             "php vendor/bin/php-cs-fixer fix"
         ],
         "fix:cs": [
-            "php vendor/bin/php-vs-fixer fix"
+            "php vendor/bin/php-cs-fixer fix"
         ]
     },
     "conflict": {
@@ -103,6 +103,7 @@
     "require-dev": {
         "codeception/codeception": "^5.0",
         "codeception/module-asserts": "^3.0",
+        "codeception/module-phpbrowser": "^3.0",
         "codeception/module-symfony": "^3.1",
         "friendsofphp/php-cs-fixer": "^3.34",
         "phpunit/phpunit": "^9.5",
