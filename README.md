@@ -9,6 +9,7 @@ Pour installer le projet, vous allez devoir :
 ```
 git clone https://iut-info.univ-reims.fr/gitlab/coud0011/symfony-contacts.git
 ```
+- Configurer la base de donnée : http://cutrona/but/s3/symfony-contacts/#configuration-de-l-acces-base-de-donnees-de-l-application
 ### CONFIGURATION
 Une fois le projet installé, vous avez des scripts mis à votre disposition :
 Pour lancer le projet :
