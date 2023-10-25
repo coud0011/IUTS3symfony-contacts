@@ -12,14 +12,22 @@ git clone https://iut-info.univ-reims.fr/gitlab/coud0011/symfony-contacts.git
 ### CONFIGURATION
 Une fois le projet installé, vous avez des scripts mis à votre disposition :
 Pour lancer le projet :
-```
+```shell
 composer start
 ```
 Pour analyser l'ensemble des codes php et savoir s'il y a des problèmes qui ne respectent pas les normes de cs fixer
-```
+```shell
 composer test:cs
 ```
 Pour corriger les problèmes de code détectés par cs fixer
+```shell
+composer fix:cs
 ```
-compose fix:cs
+Pour lancer les tests fonctionnels de codeception
+```shell
+composer test:codeception
+```
+Pour lancer l'ensemble des tests
+```shell
+composer test
 ```
