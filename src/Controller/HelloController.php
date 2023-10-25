@@ -16,15 +16,19 @@ class HelloController extends AbstractController
         ]);
     }
 
+    #[Route('/hello/{name}/{times}', requirements: ['times' => '\d+'])]
+    public function manyTimes(string $name, int $times = 3): Response
+    {
+        if (0 >= $times || $times > 10) {
+            $times = 3;
+        }
+
+        return $this->render('hello/many_times.html.twig', ['name' => $name, 'times' => $times]);
+    }
+
     #[Route('/hello/{name}')]
     public function world(string $name): Response
     {
         return $this->render('hello/world.html.twig', ['name' => $name]);
-    }
-
-    #[Route('/hello/{name}/{times}')]
-    public function manyTimes(string $name, int $times): Response
-    {
-        return $this->render('hello/many_times.html.twig',['name' => $name,'times' => $times]);
     }
 }
