@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block body %}
+    <h1>Liste de tous les contacts de l'application !</h1>
+    <ul>
+        {% for contact in contacts %}
+            <li>{{ contact.firstname }} {{ contact.lastname }} : {{ contact.email }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
