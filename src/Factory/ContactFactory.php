@@ -29,28 +29,35 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class ContactFactory extends ModelFactory
 {
+    private \Faker\Generator $transliterator;
+
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
-     *
-     * @todo inject services if required
      */
     public function __construct()
     {
+        $this->transliterator = self::faker();
         parent::__construct();
     }
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
      */
     protected function getDefaults(): array
     {
+        $firstname = $this->normalizeName($this->transliterator->firstName());
+        $lastname = $this->normalizeName($this->transliterator->lastName());
+
         return [
-            'email' => self::faker()->text(100),
-            'firstname' => self::faker()->text(30),
-            'lastname' => self::faker()->text(40),
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'email' => "$firstname.$lastname@".$this->normalizeName($this->transliterator->domainName),
         ];
+    }
+
+    protected function normalizeName(string $str): string
+    {
+        return preg_replace(' ', '_', transliterator_transliterate('Any-Lower; Latin-ASCII', mb_strtolower($str)));
     }
 
     /**
