@@ -7,6 +7,7 @@
         "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-intl": "*",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16",
@@ -29,7 +30,7 @@
         "symfony/process": "6.3.*",
         "symfony/property-access": "6.3.*",
         "symfony/property-info": "6.3.*",
-        "symfony/runtime": "^6.3",
+        "symfony/runtime": "6.3.*",
         "symfony/security-bundle": "6.3.*",
         "symfony/serializer": "6.3.*",
         "symfony/string": "6.3.*",
@@ -40,8 +41,7 @@
         "symfony/yaml": "6.3.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/intl-extra": "^3.7",
-        "twig/twig": "^2.12|^3.0",
-      "ext-intl": "*"
+        "twig/twig": "^2.12|^3.0"
     },
     "config": {
         "allow-plugins": {
@@ -92,12 +92,21 @@
             "php vendor/bin/php-cs-fixer fix"
         ],
         "test:codeception": [
-            "codecept clean",
+            "php vendor/bin/codecept clean",
+            "php bin/console doctrine:database:drop --force --quiet --env=test",
+            "php bin/console doctrine:database:create --quiet --env=test",
+            "php bin/console doctrine:schema:create --quiet --env=test",
             "php vendor/bin/codecept run"
         ],
         "test": [
             "composer test:cs",
             "composer test:codeception"
+        ],
+        "db": [
+            "php bin/console doctrine:database:drop --force --if-exists",
+            "php bin/console doctrine:database:create",
+            "php bin/console doctrine:migrations:migrate --no-interaction",
+            "php bin/console doctrine:fixtures:load --no-interaction"
         ]
     },
     "conflict": {
@@ -112,6 +121,7 @@
     "require-dev": {
         "codeception/codeception": "^5.0",
         "codeception/module-asserts": "^3.0",
+        "codeception/module-doctrine2": "^3.0",
         "codeception/module-phpbrowser": "^3.0",
         "codeception/module-symfony": "^3.1",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
@@ -130,7 +140,8 @@
         "test:cs": "Run cs-fixer tests",
         "fix:cs": "Run cs-fixer fixes",
         "start": "Start the server",
-        "test:codeception": "Run codeception tests",
-        "test": "Run all tests"
+        "test:codeception": "Run codeception tests, with database",
+        "test": "Run all tests",
+        "db": "réinitialisation de la base de donnée avec des données factices"
     }
 }

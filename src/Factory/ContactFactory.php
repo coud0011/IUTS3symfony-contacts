@@ -57,7 +57,7 @@ final class ContactFactory extends ModelFactory
 
     protected function normalizeName(string $str): string
     {
-        return preg_replace(' ', '_', transliterator_transliterate('Any-Lower; Latin-ASCII', mb_strtolower($str)));
+        return str_replace(' ', '_', transliterator_transliterate('Any-Lower; Latin-ASCII', mb_strtolower($str)));
     }
 
     /**
