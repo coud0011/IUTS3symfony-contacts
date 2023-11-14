@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\tests\Support\Helper;
+namespace App\Tests\Helper;
 
 use Codeception\Lib\Interfaces\DependsOnModule;
 use Codeception\Module;
