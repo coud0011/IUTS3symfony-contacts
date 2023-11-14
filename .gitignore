@@ -24,3 +24,6 @@
 /.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###
 /composer_2.phar
+
+
+/.idea
