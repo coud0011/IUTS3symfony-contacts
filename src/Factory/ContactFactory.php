@@ -51,13 +51,13 @@ final class ContactFactory extends ModelFactory
         return [
             'firstname' => $firstname,
             'lastname' => $lastname,
-            'email' => "$firstname.$lastname@".$this->normalizeName($this->transliterator->domainName),
-        ];
+            'email' => mb_strtolower("$firstname.$lastname@").$this->normalizeName($this->transliterator->domainName),
+            ];
     }
 
     protected function normalizeName(string $str): string
     {
-        return str_replace(' ', '_', transliterator_transliterate('Any-Lower; Latin-ASCII', mb_strtolower($str)));
+        return str_replace(' ', '_', transliterator_transliterate('Any-Latin; Latin-ASCII', $str));
     }
 
     /**

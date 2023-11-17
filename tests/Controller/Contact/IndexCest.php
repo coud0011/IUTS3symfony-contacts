@@ -26,4 +26,13 @@ class IndexCest
         $I->seeCurrentRouteIs('app_contact_id');
         $I->seeInCurrentUrl('/contact/1');
     }
+
+    public function testSearchIsGood(ControllerTester $I): void
+    {
+        ContactFactory::createMany(2);
+        ContactFactory::createOne(['firstname' => 'Aaron', 'lastname' => 'Bonjour']);
+        ContactFactory::createOne(['firstname' => 'Joe', 'lastname' => 'Aaaaaaaaaaaaaaa']);
+        $I->amOnPage('/contact?search=Aa');
+        $I->canSeeNumberOfElements('li.contacts', 2);
+    }
 }
