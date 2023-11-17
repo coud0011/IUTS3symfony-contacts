@@ -47,11 +47,12 @@ final class ContactFactory extends ModelFactory
     {
         $firstname = $this->normalizeName($this->transliterator->firstName());
         $lastname = $this->normalizeName($this->transliterator->lastName());
-
+        $phone = $this->transliterator->phoneNumber();
         return [
             'firstname' => $firstname,
             'lastname' => $lastname,
             'email' => mb_strtolower("$firstname.$lastname@").$this->normalizeName($this->transliterator->domainName),
+            'phone' => $phone,
             ];
     }
 
