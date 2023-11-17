@@ -15,4 +15,11 @@ class ContactFixtures extends Fixture
         // create/persist 150 contacts with random data from getDefaults()
         ContactFactory::createMany(150);
     }
+
+    public function getDependencies()
+    {
+        return [
+            CategoryFixtures::class,
+            ];
+    }
 }
