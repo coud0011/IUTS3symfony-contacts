@@ -1,0 +1,12 @@
+{% extends 'Nav_base.html.twig' %}
+
+{% block title %}Liste des catégories{% endblock %}
+
+{% block body %}
+    <h1>Liste des catégories</h1>
+    <ul>
+        {% for category in categories %}
+            <li class="categories"><a href="{{ path('app_category_id', {id: category.id })}}"><span class="firstname">{{ category.name }}</span></a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
