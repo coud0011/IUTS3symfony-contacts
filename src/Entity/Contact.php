@@ -86,7 +86,7 @@ class Contact
         return $this->category;
     }
 
-    public function setCategory(?Category $category): static
+    public function setCategory(?Category $category): ?Contact
     {
         $this->category = $category;
 

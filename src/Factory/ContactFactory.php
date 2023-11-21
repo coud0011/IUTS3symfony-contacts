@@ -54,10 +54,8 @@ final class ContactFactory extends ModelFactory
             'lastname' => $lastname,
             'email' => mb_strtolower("$firstname.$lastname@").$this->normalizeName($this->transliterator->domainName),
             'phone' => $phone,
-            'Category' => function () {
-                return $this->transliterator->boolean(90) ? CategoryFactory::random() : null;
-            },
-            ];
+            'category' => $this->transliterator->boolean(90) ? CategoryFactory::random() : null,
+        ];
     }
 
     protected function normalizeName(string $str): string

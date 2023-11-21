@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller\Contact;
 
+use App\Factory\CategoryFactory;
 use App\Factory\ContactFactory;
 use App\Tests\ControllerTester;
 
@@ -17,7 +18,8 @@ class IndexCest
 
     public function testAssertThatContactLinksAreWorking(ControllerTester $I): void
     {
-        ContactFactory::createOne(['firstname' => 'Joe', 'lastname' => 'Aaaaaaaaaaaaaaa']);
+        $category = CategoryFactory::createOne();
+        ContactFactory::createOne(['firstname' => 'Joe', 'lastname' => 'Aaaaaaaaaaaaaaa', 'category' => $category]);
         ContactFactory::createMany(5);
         $I->amOnPage('/contact');
         $I->see('Aaaaaaaaaaaaaaa, Joe');
@@ -29,6 +31,7 @@ class IndexCest
 
     public function testSearchIsGood(ControllerTester $I): void
     {
+        CategoryFactory::createOne();
         ContactFactory::createMany(2);
         ContactFactory::createOne(['firstname' => 'Aaron', 'lastname' => 'Bonjour']);
         ContactFactory::createOne(['firstname' => 'Joe', 'lastname' => 'Aaaaaaaaaaaaaaa']);
