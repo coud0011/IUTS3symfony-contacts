@@ -27,11 +27,14 @@ class CategoryRepository extends ServiceEntityRepository
     public function search(string $researching = ''): array
     {
         $qb = $this->createQueryBuilder('p');
+        $qb->leftJoin('p.contacts', 'c');
         $qb->where($qb->expr()->orX(
             $qb->expr()->like('p.name', ':researching'),
             $qb->expr()->like('p.name', ':researching')))
             ->setParameter('researching', '%'.$researching.'%')
             ->orderBy('p.name');
+        $qb->groupBy('p');
+        $qb->addSelect('COUNT(c) as count');
 
         return $qb->getQuery()->execute();
     }

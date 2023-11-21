@@ -33,6 +33,7 @@ class ContactRepository extends ServiceEntityRepository
         ->setParameter('researching', '%'.$researching.'%')
         ->orderBy('p.lastname, p.firstname');
 
+
         return $qb->getQuery()->execute();
     }
 
