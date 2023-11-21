@@ -15,8 +15,7 @@ class CategoryController extends AbstractController
     public function index(CategoryRepository $repository, Request $request): Response
     {
         $search = $request->query->get('search', '');
-        $categories = $repository->search($search);
-
+        dump($categories = $repository->search($search));
         return $this->render('category/index.html.twig', ['categories' => $categories, 'search' => '' == $search ? 'Search' : $search]);
     }
 

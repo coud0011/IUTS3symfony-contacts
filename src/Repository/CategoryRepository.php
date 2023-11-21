@@ -27,6 +27,7 @@ class CategoryRepository extends ServiceEntityRepository
     public function search(string $researching = ''): array
     {
         $qb = $this->createQueryBuilder('p');
+        $qb->select('c as category');
         $qb->leftJoin('p.contacts', 'c');
         $qb->where($qb->expr()->orX(
             $qb->expr()->like('p.name', ':researching'),
