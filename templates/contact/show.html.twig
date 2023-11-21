@@ -1,4 +1,4 @@
-{% extends '/contact/base.html.twig' %}
+{% extends 'Nav_base.html.twig' %}
 
 {% block title %}
 {{ contact.firstname }} {{ contact.lastname }}
@@ -15,5 +15,7 @@
         <dd>{{ contact.email }}</dd>
         <dt><h3>Phone Number</h3></dt>
         <dd>{{ contact.phone }}</dd>
+        <dt><h3>Category</h3></dt>
+        <dd>{{ contact.category.name ?? "Hors Catégories" }}</dd>
     </dl>
 {% endblock %}
