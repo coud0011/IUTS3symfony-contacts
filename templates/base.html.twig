@@ -47,8 +47,8 @@
                 </li>
             </ul>
             <form class="d-flex" role="search" action="{{ path('app_contact') }}">
-                <input class="form-control me-2{% if research is not defined %} disabled{% endif %}" type="search" placeholder="{% if research is defined %}{{ research }}{% endif %}" aria-label="Rechercher" name="search">
-                <button class="btn btn-outline-success{% if research is not defined %} disabled{% endif %}" type="submit">Rechercher</button>
+                <input class="form-control me-2{% if search is not defined %} disabled{% endif %}" type="search" placeholder="{% if search is defined %}{{ search }}{% else %}Search{% endif %}" aria-label="Rechercher" name="search">
+                <button class="btn btn-outline-success{% if search is not defined %} disabled{% endif %}" type="submit">Rechercher</button>
             </form>
         </div>
     </div>
