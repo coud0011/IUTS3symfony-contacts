@@ -1,5 +1,17 @@
 <ul>
     {% for contact in contacts %}
-            <li class="contacts"><a href="{{ path('app_contact_id', {id: contact.id })}}"><span class="lastname">{{ contact.lastname }}</span>, <span class="firstname">{{ contact.firstname }}</span></a> <a href="{{ path('app_category_id', contact.category is null?[]:['id':contact.category.id]) }}"><span class="badge bg-secondary">{{ contact.category is null?'Hors Category':contact.category.name }}</span></a></li>
+            <li class="contacts">
+                <a href="{{ path('app_contact_id', {id: contact.id })}}">
+                    <span class="lastname">{{ contact.lastname }}</span>,
+                    <span class="firstname">{{ contact.firstname }}</span>
+                </a>
+                {% if show_category??true %}
+                <a href="{{ contact.category is null?'':path('app_category_id', { 'id': contact.category.id}) }}">
+                    <span class="badge bg-secondary">
+                        {{ contact.category is null?'Hors Category':contact.category.name }}
+                    </span>
+                </a>
+                {% endif %}
+            </li>
     {% endfor %}
 </ul>

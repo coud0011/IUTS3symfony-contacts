@@ -32,7 +32,9 @@ class ContactRepository extends ServiceEntityRepository
             $qb->expr()->like('p.firstname', ':researching'),
             $qb->expr()->like('p.lastname', ':researching')))
         ->setParameter('researching', '%'.$researching.'%')
-        ->orderBy('p.lastname, p.firstname');
+        ->orderBy('p.lastname, p.firstname')
+        ->leftJoin('p.category', 'ca')
+        ->addSelect('ca');
 
         return $qb->getQuery()->execute();
     }

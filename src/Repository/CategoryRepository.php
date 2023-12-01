@@ -27,6 +27,7 @@ class CategoryRepository extends ServiceEntityRepository
     public function search(string $researching = ''): array
     {
         $qb = $this->createQueryBuilder('c');
+
         return $qb->getQuery()->execute();
     }
 
