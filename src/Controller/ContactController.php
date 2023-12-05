@@ -23,16 +23,26 @@ class ContactController extends AbstractController
         return $this->render('contact/index.html.twig', ['contacts' => $contacts, 'search' => '' == $search ? 'Search' : $search]);
     }
 
+    #[Route('/contact/create', name: 'app_contact_create')]
+    public function create(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contact = $form->getData();
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_contact_id', ['id' => $contact->getId()]);
+        }
+        return $this->render('contact/create.html.twig', ['form' => $form]);
+    }
+
     #[Route('/contact/{id}', name: 'app_contact_id', requirements: ['id' => '\d+'])]
     public function show(#[MapEntity(expr: 'repository.findWithCategory(id)')] Contact $contact): Response
     {
         return $this->render('contact/show.html.twig', ['contact' => $contact]);
-    }
-
-    #[Route('/contact/create', name: 'app_contact_create')]
-    public function create(): Response
-    {
-        return $this->render('contact/create.html.twig', ['contact' => $contact]);
     }
 
     #[Route('/contact/{id}/delete', name: 'app_contact_delete', requirements: ['id' => '\d+'])]
@@ -47,8 +57,6 @@ class ContactController extends AbstractController
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
             $contact = $form->getData();
             $entityManager->flush();
 
