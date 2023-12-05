@@ -32,7 +32,7 @@ class Contact
 
     #[ORM\Column(length: 20)]
     #[Assert\NotBlank()]
-    #[Assert\Length(min: 2, max: 10)]
+    #[Assert\Length(min: 2, max: 25)]
     #[Assert\Regex(pattern: '/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4})$/', message: 'Format de téléphone invalide')]
     private ?string $phone = null;
 
