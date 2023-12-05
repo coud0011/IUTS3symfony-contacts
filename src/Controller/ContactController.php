@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Form\ContactType;
 use App\Repository\ContactRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,7 +31,7 @@ class ContactController extends AbstractController
     #[Route('/contact/create', name: 'app_contact_create')]
     public function create(): Response
     {
-        return $this->render('contact/create.html.twig');
+        return $this->render('contact/create.html.twig', ['contact' => $contact]);
     }
 
     #[Route('/contact/{id}/delete', name: 'app_contact_delete', requirements: ['id' => '\d+'])]
@@ -42,6 +43,8 @@ class ContactController extends AbstractController
     #[Route('/contact/{id}/update', name: 'app_contact_update', requirements: ['id' => '\d+'])]
     public function update(#[MapEntity(expr: 'repository.findWithCategory(id)')] Contact $contact): Response
     {
-        return $this->render('contact/update.html.twig', ['contact' => $contact]);
+        $form = $this->createForm(ContactType::class, $contact);
+
+        return $this->render('contact/update.html.twig', ['form' => $form, 'contact' => $contact]);
     }
 }
