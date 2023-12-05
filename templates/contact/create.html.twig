@@ -3,7 +3,11 @@
 {% block body %}
     <h1>Création d'un nouveau contact</h1>
     {{ form_start(form, {'attr': {'class': 'w-auto p-3 container-lg'}}) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.firstname, {'label': 'Prénom ', 'attr': {'placeholder': 'Prenom', 'class': 'w-auto p-3'}}) }}
+    {{ form_row(form.lastname, {'label': 'Nom ', 'attr': {'placeholder': 'Nom', 'class': 'w-auto p-3'}}) }}
+    {{ form_row(form.email, {'label': 'Email ', 'attr': {'placeholder': 'exemple@exemple.ex', 'class': 'w-auto p-3'}}) }}
+    {{ form_row(form.phone, {'label': 'Téléphone ', 'attr': {'placeholder': 'Numero de Telephone', 'class': 'w-auto p-3'}}) }}
+    {{ form_row(form.category, {'label': 'Catégorie ', 'attr': {'placeholder': 'Categorie', 'class': 'w-auto p-3'}}) }}
     <input type="submit" class="w-auto p-3 btn btn-primary btn-lg btn-block" value="Créer">
     {{ form_end(form) }}
 {% endblock %}
