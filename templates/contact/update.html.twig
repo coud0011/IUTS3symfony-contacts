@@ -4,7 +4,7 @@
     <h1>Édition de {{ contact.firstname }} {{ contact.lastname|upper }}</h1>
     {{ form_start(form, {'attr': {'class': 'w-auto p-3 container-lg'}}) }}
     {{ form_widget(form) }}
-    <input type="submit" class="w-auto p-3" value="Modifier">
+    <input type="submit" class="w-auto p-3 btn btn-primary btn-lg btn-block" value="Modifier">
     {{ form_end(form) }}
 {% endblock %}
 
