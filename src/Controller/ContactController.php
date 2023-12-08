@@ -8,6 +8,7 @@ use App\Repository\ContactRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +37,7 @@ class ContactController extends AbstractController
 
             return $this->redirectToRoute('app_contact_id', ['id' => $contact->getId()]);
         }
+
         return $this->render('contact/create.html.twig', ['form' => $form]);
     }
 
@@ -46,9 +48,23 @@ class ContactController extends AbstractController
     }
 
     #[Route('/contact/{id}/delete', name: 'app_contact_delete', requirements: ['id' => '\d+'])]
-    public function delete(#[MapEntity(expr: 'repository.findWithCategory(id)')] Contact $contact): Response
+    public function delete(#[MapEntity(expr: 'repository.findWithCategory(id)')] Contact $contact, Request $request, ContactRepository $repository): Response
     {
-        return $this->render('contact/delete.html.twig', ['contact' => $contact]);
+        $form = $this->createFormBuilder($contact)
+            ->add('goback', SubmitType::class, ['label' => 'Annuler'])
+            ->add('delete', SubmitType::class, ['label' => 'Supprimmer'])
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('delete')->isClicked()) {
+                $repository->deleteContact($contact->getId());
+                return $this->redirectToRoute('app_contact');
+            } else {
+                return $this->redirectToRoute('app_contact_id', ['id' => $contact->getId()]);
+            }
+        }
+
+        return $this->render('contact/delete.html.twig', ['contact' => $contact, 'form' => $form]);
     }
 
     #[Route('/contact/{id}/update', name: 'app_contact_update', requirements: ['id' => '\d+'])]

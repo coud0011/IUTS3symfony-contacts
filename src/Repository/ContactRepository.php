@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Contact;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -53,6 +54,13 @@ class ContactRepository extends ServiceEntityRepository
         return $result = $qb->getQuery()->getOneOrNullResult();
     }
 
+    /**
+     * @throws Exception
+     */
+    public function deleteContact($id): void
+    {
+        $this->getEntityManager()->getConnection()->delete('contact', ['id' => $id]);
+    }
     //    /**
     //     * @return Contact[] Returns an array of Contact objects
     //     */
