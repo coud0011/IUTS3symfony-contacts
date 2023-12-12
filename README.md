@@ -35,6 +35,10 @@ composer test
 Pour configurer la base de donnée, vous devez copier .env en .env.local et y changer les informations de la variable 
 DATABASE_URL pour y assigner les informations pour accéder votre base de donnée (quelle qu'elle soit).
 Pour réinitialiser la base de donnée et y rentrer des données factices : 
-````shell
+```shell
 composer db
-````
+```
+
+Vous avez accès à deux utilisateurs pour tester l'application :
+- Tony Stark : Administrateur, root@example.com, mdp=test
+- Peter Parker : Utilisateur, user@example.com, mdp=test
