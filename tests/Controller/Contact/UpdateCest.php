@@ -3,7 +3,7 @@
 namespace App\Tests\Controller\Contact;
 
 use App\Factory\ContactFactory;
-use App\Tests\Support\ControllerTester;
+use App\Tests\ControllerTester;
 
 class UpdateCest
 {

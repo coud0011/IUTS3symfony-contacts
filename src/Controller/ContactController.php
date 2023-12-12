@@ -58,6 +58,7 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('delete')->isClicked()) {
                 $repository->deleteContact($contact->getId());
+
                 return $this->redirectToRoute('app_contact');
             } else {
                 return $this->redirectToRoute('app_contact_id', ['id' => $contact->getId()]);
