@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller\Contact;
 
+use App\Factory\CategoryFactory;
 use App\Factory\ContactFactory;
 use App\Tests\ControllerTester;
 
@@ -9,6 +10,7 @@ class DeleteCest
 {
     public function form(ControllerTester $I): void
     {
+        CategoryFactory::createOne();
         ContactFactory::createOne([
             'firstname' => 'Homer',
             'lastname' => 'Simpson',

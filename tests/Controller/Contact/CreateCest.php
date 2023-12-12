@@ -10,7 +10,7 @@ class CreateCest
     {
         $I->amOnPage('/contact/create');
 
-        $I->seeInTitle("Création d'un nouveau contact");
-        $I->see("Création d'un nouveau contact", 'h1');
+        $I->seeInTitle('Création d`un nouveau contact');
+        $I->see('Création d`un nouveau contact', 'h1');
     }
 }

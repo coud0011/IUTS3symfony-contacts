@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Création d'un nouveau contact</h1>
+    <h1>{{ submit_label=='Créer'?'Création d`un nouveau contact':"Édition de #{contact.lastname}, #{contact.firstname}" }}</h1>
     {{ form_start(form, {'attr': {'class': 'w-auto p-3 container-lg'}}) }}
     {{ form_row(form.firstname, {'label': 'Prénom ', 'attr': {'placeholder': 'Prenom', 'class': 'd-flex w-auto p-3'}}) }}
     {{ form_row(form.lastname, {'label': 'Nom ', 'attr': {'placeholder': 'Nom', 'class': 'd-flex w-auto p-3'}}) }}
@@ -13,6 +13,6 @@
 {% endblock %}
 
 {% block title %}
-    Création d'un nouveau contact
+    {{ submit_label=='Créer'?'Création d`un nouveau contact':"Édition de #{contact.lastname}, #{contact.firstname}" }}
 {% endblock %}
 
