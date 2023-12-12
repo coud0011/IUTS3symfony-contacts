@@ -27,12 +27,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item Authentication">
+                    {{ is_granted('IS_AUTHENTICATED_REMEMBERED')?'<a class="nav-link btn btn-secondary" href="/logout">#{app.user.username} voulez-vous vous déconnecter?</a>':'<a class="nav-link btn btn-secondary" href="/login">Connexion</a>' }}
+                </li>
                 <li class="nav-item Categories">
                     <a class="nav-link Category" href="{{ path('app_category') }}">Categories</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_contact_create') }}">Ajouter un contact</a>
-                </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_contact_create') }}">Ajouter un contact</a>
+                    </li>
+                {% endif %}
             </ul>
             <form class="d-flex" role="search" action="{{ path('app_contact') }}">
                 <input class="form-control me-2{% if search is not defined %} disabled{% endif %}" type="search" placeholder="{% if search is defined %}{{ search }}{% else %}Search{% endif %}" aria-label="Rechercher" name="search">

@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ContactController extends AbstractController
 {
@@ -25,6 +26,7 @@ class ContactController extends AbstractController
     }
 
     #[Route('/contact/create', name: 'app_contact_create')]
+    #[IsGranted('ROLE_ADMIN')]
     public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
         $contact = new Contact();
@@ -48,6 +50,7 @@ class ContactController extends AbstractController
     }
 
     #[Route('/contact/{id}/delete', name: 'app_contact_delete', requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(#[MapEntity(expr: 'repository.findWithCategory(id)')] Contact $contact, Request $request, ContactRepository $repository): Response
     {
         $form = $this->createFormBuilder($contact)
@@ -69,6 +72,7 @@ class ContactController extends AbstractController
     }
 
     #[Route('/contact/{id}/update', name: 'app_contact_update', requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function update(#[MapEntity(expr: 'repository.findWithCategory(id)')] Contact $contact, EntityManagerInterface $entityManager, Request $request): Response
     {
         $form = $this->createForm(ContactType::class, $contact);
