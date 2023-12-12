@@ -23,6 +23,5 @@ class UserFixtures extends Fixture
             'roles' => ['ROLE_ADMIN'],
         ]);
         UserFactory::createMany(10);
-
     }
 }
