@@ -5,19 +5,19 @@
                     <a href="{{ path('app_contact_update', {'id': contact.id}) }}"><span class="material-symbols-outlined text-warning">edit</span></a>
                     <a href="{{ path('app_contact_delete', {'id': contact.id}) }}"><span class="material-symbols-outlined text-danger">delete</span></a>
                 {% endif %}
-                <a href="{{ path('app_contact_id', {id: contact.id })}}">
-                    <span class="badge bg-primary">
+                <span class="badge bg-primary">
+                    <a href="{{ path('app_contact_id', {id: contact.id })}}">
                         <span class="lastname">{{ contact.lastname }}</span>,
                         <span class="firstname">{{ contact.firstname }}</span>
-                    </span>
-                </a>
-                {% if show_category??true %}
-                <a href="{{ contact.category is null?'':path('app_category_id', { 'id': contact.category.id}) }}">
-                    <span class="badge bg-secondary">
-                        {{ contact.category is null?'Hors Category':contact.category.name }}
-                    </span>
-                </a>
-                {% endif %}
+                    </a>
+                    {% if show_category??true %}
+                    <a href="{{ contact.category is null?'':path('app_category_id', { 'id': contact.category.id}) }}">
+                        <span class="badge bg-secondary">
+                            {{ contact.category is null?'Hors Category':contact.category.name }}
+                        </span>
+                    </a>
+                    {% endif %}
+                </span>
             </li>
     {% endfor %}
 </ul>
